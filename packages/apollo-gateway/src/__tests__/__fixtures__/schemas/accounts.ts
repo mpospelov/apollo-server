@@ -67,6 +67,13 @@ const users = [
     username: '@complete',
     account: { __typename: 'SMSAccount', number: '8675309' },
   },
+  {
+    id: '3',
+    name: () => { throw new Error('Not Alan Not Turing') },
+    birthDate: '1219-09-31',
+    username: '@incomplete',
+    account: { __typename: 'SMSAccount', number: '9035786' },
+  },
 ];
 
 const metadata = [
@@ -77,6 +84,10 @@ const metadata = [
   {
     id: '2',
     metadata: [{ name: 'meta2', address: '3', description: '4' }],
+  },
+  {
+    id: '3',
+    metadata: [{ name: 'meta3', address: '5', description: '6' }],
   },
 ];
 

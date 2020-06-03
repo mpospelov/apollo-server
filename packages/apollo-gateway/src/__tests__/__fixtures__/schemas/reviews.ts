@@ -139,6 +139,12 @@ const reviews = [
     product: { __typename: 'Book', isbn: '0201633612' },
     body: 'A classic.',
   },
+  {
+    id: '7',
+    authorID: '3',
+    product: { __typename: 'Furniture', isbn: '3' },
+    body: 'Hmmm',
+  },
 ];
 
 export const resolvers: GraphQLResolverMap<any> = {

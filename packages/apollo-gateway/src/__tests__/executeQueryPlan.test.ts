@@ -210,6 +210,32 @@ describe('executeQueryPlan', () => {
       expect(response).toHaveProperty('data.me', null);
       expect(response).toHaveProperty('data.topReviews', expect.any(Array));
     });
+
+    it.only(`should build proper path in case one of the services raised error field`, async () => {
+      const query = gql`
+        query {
+          topReviews(first: 10) {
+            author {
+              name
+            }
+          }
+        }
+      `;
+
+      const operationContext = buildOperationContext(schema, query);
+      const queryPlan = buildQueryPlan(operationContext);
+
+      const response = await executeQueryPlan(
+        queryPlan,
+        serviceMap,
+        buildRequestContext(),
+        operationContext,
+      );
+
+      expect(response).toHaveProperty('errors.0.path', ['topReviews', 7, 'author', 'name'])
+      expect(response).toHaveProperty('data.user', {name: null});
+      expect(response).toHaveProperty('data.topReviews', expect.any(Array));
+    });
   });
 
   it(`should only return fields that have been requested directly`, async () => {
